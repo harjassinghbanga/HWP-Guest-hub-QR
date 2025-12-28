@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel White Pearl Help</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="Combined side by side logo for single spaces.png" alt="Hotel White Pearl Logo" class="logo">
+        <h1>How can we help you today?</h1>
+        <div class="buttons">
+            <a href="tel:8982260004" class="button">📞 Contact / Call Reception</a>
+            <a href="https://wa.me/918982260004?text=Hi,%20I'm%sending%20my%20ID%20proof" class="button">💬 Send ID on WhatsApp</a>
+            <a href="Hangout Cafe - Foodgasm Menu PDF RESOLVED AND MADE BETTER.pdf" class="button">🍽 Food Menu</a>
+            <a href="https://g.page/r/CQ4YrjR0fqCuEBM" class="button">⭐ Leave a Review</a>
+            <a href="https://wa.me/918982260001?text=Raise%20a%20complaint%20or%20request%20service" class="button">🛠 Raise a Complaint / Request Service</a>
+            <a href="breakfast-menu.html" class="button">🍽 FoodGasm's Breakfast Menu</a>
+            <button class="button" onclick="showInfo()">ℹ️ Hotel Info</button>
+        </div>
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeInfo()">&times;</span>
+                <h2>Hotel Info</h2>
+                <p><strong>Wi-Fi:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>floor: Pearl@123 " </p>
+                <p><strong>Checkout Time:</strong> 11 AM</p>
+                <p><strong>Rules:</strong>  No Smoking in the Lobby, No Spitting on the Dustbins & Do not Damage Hotel Property.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showInfo() {
+            document.getElementById('info-modal').style.display = 'block';
+        }
+        function closeInfo() {
+            document.getElementById('info-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

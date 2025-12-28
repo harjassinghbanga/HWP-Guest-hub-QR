@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    justify-items: center;
+}
+
+.button {
+    display: inline-block;
+    width: 100%;
+    max-width: 180px;
+    padding: 20px 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1em;
+    text-align: center;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+}
+
+.button:nth-child(1) {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+.button:nth-child(2) {
+    background: linear-gradient(45deg, #28a745, #1e7e34);
+}
+
+.button:nth-child(3) {
+    background: linear-gradient(45deg, #ffc107, #e0a800);
+}
+
+.button:nth-child(4) {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+}
+
+.button:nth-child(5) {
+    background: linear-gradient(45deg, #044549, #03373a);
+}
+
+.button:nth-child(6) {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+    color: black;
+}
+
+.button:nth-child(7) {
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    color: black;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:active {
+    background-color: #004085;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.menu-image {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 480px) {
+    .buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .button {
+        max-width: none;
+        padding: 15px 10px;
+        font-size: 0.9em;
+    }
