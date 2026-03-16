@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest-Connect Hotel White Pearl</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="language-toggle">EN/हिंदी</button>
+    <div class="container guest-container">
+        <img src="Combined side by side logo for single spaces.png" alt="Hotel White Pearl Logo" class="logo">
+        <h1>How can we help you today?</h1>
+        <div class="buttons">
+            <a href="tel:8982260004" class="button">📞 Contact / Call Reception</a>
+            <a href="https://wa.me/918982260004?text=Hi,%20I'm%20sending%20my%20ID%20proof" class="button">💬 Send ID on WhatsApp</a>
+            <a href="Hangout Cafe - Foodgasm Menu PDF RESOLVED AND MADE BETTER.pdf" class="button">🍽 Food Menu</a>
+            <a href="https://g.page/r/CQ4YrjR0fqCuEBM" class="button">⭐ Leave a Review</a>
+            <a href="https://wa.me/918982260001?text=Raise%20a%20complaint%20or%20request%20service" class="button">🛠 Raise a Complaint / Request Service</a>
+            <a href="breakfast-menu.html" class="button">🍽 FoodGasm's Breakfast Menu</a>
+            <button class="button" onclick="showInfo()">ℹ️ Hotel Info</button>
+        </div>
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeInfo()">&times;</span>
+                <h2>Dear Guest</h2>
+                <p><strong>Wi-Fi:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123</p>
+                <p><strong>Checkout Time:</strong> 11 AM</p>
+                <p><strong>Rules:</strong>  No Smoking in the Lobby<br>No Spitting on the Dustbins<br>Do not Damage Hotel Property.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        let isHindi = false;
+
+        const translations = {
+            en: {
+                title: "How can we help you today?",
+                contact: "📞 Contact / Call Reception",
+                whatsapp: "💬 Send ID on WhatsApp",
+                foodMenu: "🍽 Food Menu",
+                review: "⭐ Leave a Review",
+                complaint: "🛠 Raise a Complaint / Send Review Screenshot",
+                breakfast: "🍽 FoodGasm's Breakfast Menu",
+                hotelInfo: "ℹ️ Hotel Info",
+                modalTitle: "Hotel Info",
+                wifi: "<strong>Wi-Fi:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123 \"",
+                checkout: "<strong>Checkout Time:</strong> 11 AM",
+                rules: "<strong>Rules:</strong> No Smoking in the Lobby<br>No Spitting on the Dustbins<br>Do not Damage Hotel Property."
+            },
+            hi: {
+                title: "आज हम आपकी कैसे मदद कर सकते हैं?",
+                contact: "📞 संपर्क करें / रिसेप्शन पर कॉल करें",
+                whatsapp: "💬 व्हाट्सएप पर आईडी भेजें",
+                foodMenu: "🍽 खाना मेनू",
+                review: "⭐ समीक्षा छोड़ें",
+                complaint: "🛠 शिकायत दर्ज करें / सेवा का अनुरोध करें",
+                breakfast: "🍽 फूडगैस्म का नाश्ता मेनू",
+                hotelInfo: "ℹ️ होटल जानकारी",
+                modalTitle: "होटल जानकारी",
+                wifi: "<strong>वाई-फाई:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123 \"",
+                checkout: "<strong>चेकआउट समय:</strong> 11 AM",
+                rules: "<strong>नियम:</strong> लॉबी में धूम्रपान न करें<br>डस्टबिन पर थूकें नहीं<br>होटल की संपत्ति को नुकसान न पहुंचाएं।"
+            }
+        };
+
+        function toggleLanguage() {
+            isHindi = !isHindi;
+            const lang = isHindi ? 'hi' : 'en';
+            document.querySelector('h1').innerHTML = translations[lang].title;
+            document.querySelectorAll('.button')[0].innerHTML = translations[lang].contact;
+            document.querySelectorAll('.button')[1].innerHTML = translations[lang].whatsapp;
+            document.querySelectorAll('.button')[2].innerHTML = translations[lang].foodMenu;
+            document.querySelectorAll('.button')[3].innerHTML = translations[lang].review;
+            document.querySelectorAll('.button')[4].innerHTML = translations[lang].complaint;
+            document.querySelectorAll('.button')[5].innerHTML = translations[lang].breakfast;
+            document.querySelectorAll('.button')[6].innerHTML = translations[lang].hotelInfo;
+            document.querySelector('#info-modal h2').innerHTML = translations[lang].modalTitle;
+            document.querySelector('#info-modal p:nth-child(2)').innerHTML = translations[lang].wifi;
+            document.querySelector('#info-modal p:nth-child(3)').innerHTML = translations[lang].checkout;
+            document.querySelector('#info-modal p:nth-child(4)').innerHTML = translations[lang].rules;
+        }
+
+        document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
+
+        function showInfo() {
+            document.getElementById('info-modal').style.display = 'flex';
+        }
+        function closeInfo() {
+            document.getElementById('info-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
