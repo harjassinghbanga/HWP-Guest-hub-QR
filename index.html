@@ -1,96 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest-Connect Hotel White Pearl</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <button id="language-toggle">EN/हिंदी</button>
-    <div class="container">
-        <img src="Combined side by side logo for single spaces.png" alt="Hotel White Pearl Logo" class="logo">
-        <h1>How can we help you today?</h1>
-        <div class="buttons">
-            <a href="tel:8982260004" class="button">📞 Contact / Call Reception</a>
-            <a href="https://wa.me/918982260004?text=Hi,%20I'm%20sending%20my%20ID%20proof" class="button">💬 Send ID on WhatsApp</a>
-            <a href="Hangout Cafe - Foodgasm Menu PDF RESOLVED AND MADE BETTER.pdf" class="button">🍽 Food Menu</a>
-            <a href="https://g.page/r/CQ4YrjR0fqCuEBM" class="button">⭐ Leave a Review</a>
-            <a href="https://wa.me/918982260001?text=Raise%20a%20complaint%20or%20request%20service" class="button">🛠 Raise a Complaint / Request Service</a>
-            <a href="FoodGasm bFAST MENU PDF.pdf" class="button">🍽 FoodGasm's Breakfast Menu</a>
-            <button class="button" onclick="showInfo()">ℹ️ Hotel Info</button>
-        </div>
-        <div id="info-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeInfo()">&times;</span>
-                <h2>Dear Guest</h2>
-                <p><strong>Wi-Fi:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123</p>
-                <p><strong>Checkout Time:</strong> 11 AM</p>
-                <p><strong>Rules:</strong>  No Smoking in the Lobby<br>No Spitting on the Dustbins<br>Do not Damage Hotel Property.</p>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Hotel White Pearl — Luxury & Comfort</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <style>
+        /* Rotating 3D cube for hotel photos */
+        .cube-scene { width: 360px; height: 360px; margin: 0 auto; perspective: 1000px; position: relative; }
+        .cube { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s ease-out; }
+        .cube__face { position: absolute; width: 100%; height: 100%; left: 0; top: 0; display:flex; align-items:center; justify-content:center; overflow:hidden; backface-visibility: hidden; }
+        .cube__face img { width: 100%; height: 100%; object-fit: cover; display:block; }
+        .cube__face--front  { transform: translateZ(180px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(180px); }
+        .cube__face--right  { transform: rotateY(90deg) translateZ(180px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(180px); }
+        .cube__face--top    { transform: rotateX(90deg) translateZ(180px); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(180px); }
+
+        /* Hover controls */
+        .cube-controls { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; opacity: 0; transition: opacity 0.3s ease; padding: 0 16px; font-family: Montserrat, sans-serif; }
+        .cube-scene:hover .cube-controls { opacity: 1; }
+        .cube-btn { background: rgba(255,255,255,0.9); color: #1a1a1a; border: none; padding: 12px 16px; font-weight: 600; cursor: pointer; border-radius: 4px; transition: all 0.2s; font-size: 14px; }
+        .cube-btn:hover { background: #fff; transform: scale(1.05); }
+        .cube-btn:active { transform: scale(0.95); }
+
+        /* Responsive tweaks */
+        @media (max-width:600px){ .cube-scene{width:260px;height:260px;} .cube-controls{padding:0 8px;} .cube-btn{padding:10px 12px;font-size:12px;} }
+        </style>
+        
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="nav-inner">
+                <div class="brand">
+                    <img src="Hotel WP.jpg" alt="White Pearl" class="logo" />
+                    <div class="hotel-name"></div>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#rooms" class="nav-link">Rooms</a>
+                    <a href="guest-connect.html" class="nav-cta">Guest Connect</a>
+                </nav>
             </div>
-        </div>
-    </div>
-    <script>
-        let isHindi = false;
+        </header>
 
-        const translations = {
-            en: {
-                title: "How can we help you today?",
-                contact: "📞 Contact / Call Reception",
-                whatsapp: "💬 Send ID on WhatsApp",
-                foodMenu: "🍽 Food Menu",
-                review: "⭐ Leave a Review",
-                complaint: "🛠 Raise a Complaint / Send Review Screenshot",
-                breakfast: "🍽 FoodGasm's Breakfast Menu",
-                hotelInfo: "ℹ️ Hotel Info",
-                modalTitle: "Hotel Info",
-                wifi: "<strong>Wi-Fi:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123 \"",
-                checkout: "<strong>Checkout Time:</strong> 11 AM",
-                rules: "<strong>Rules:</strong> No Smoking in the Lobby<br>No Spitting on the Dustbins<br>Do not Damage Hotel Property."
-            },
-            hi: {
-                title: "आज हम आपकी कैसे मदद कर सकते हैं?",
-                contact: "📞 संपर्क करें / रिसेप्शन पर कॉल करें",
-                whatsapp: "💬 व्हाट्सएप पर आईडी भेजें",
-                foodMenu: "🍽 खाना मेनू",
-                review: "⭐ समीक्षा छोड़ें",
-                complaint: "🛠 शिकायत दर्ज करें / रिव्यू का स्क्रीनशॉट भेजें",
-                breakfast: "🍽 फूडगैस्म का नाश्ता मेनू",
-                hotelInfo: "ℹ️ होटल जानकारी",
-                modalTitle: "होटल जानकारी",
-                wifi: "<strong>वाई-फाई:</strong> <br>1st floor: Pearl@123<br>2nd floor: 9200985555<br>3rd floor: Pearl@123 \"",
-                checkout: "<strong>चेकआउट समय:</strong> 11 AM",
-                rules: "<strong>नियम:</strong> लॉबी में धूम्रपान न करें<br>डस्टबिन पर थूकें नहीं<br>होटल की संपत्ति को नुकसान न पहुंचाएं।"
+        <main>
+            <section class="hero">
+                <div class="hero-inner">
+                    <h1 class="hero-title">A refined stay in the heart of the city</h1>
+                    <p class="hero-sub">Experience attentive service, elegant rooms and contemporary comforts designed for discerning travellers.</p>
+                    <a class="hero-button" href="guest-connect.html">Guest Connect</a>
+                </div>
+                <div class="hero-image" aria-hidden="true"></div>
+            </section>
+
+            <section id="about" class="content-section">
+                <div class="container-wide">
+                    <div class="section-grid">
+                        <div class="text">
+                            <h2>About Hotel White Pearl</h2>
+                            <p>Hotel White Pearl blends contemporary luxury with warm hospitality. Our rooms are thoughtfully appointed, our dining celebrates local flavours, and our team is dedicated to making your stay effortless and memorable.</p>
+                            <ul class="features">
+                                <li><strong>Prime location:</strong> easy access to transport and attractions</li>
+                                <li><strong>Elegant rooms:</strong> comfortable beds, premium linens</li>
+                                <li><strong>Dining:</strong> signature restaurant and 24/7 room service</li>
+                            </ul>
+                        </div>
+                        <div class="gallery">
+                            <div class="cube-scene" aria-label="Hotel photo cube">
+                                <div class="cube" id="hotel-cube">
+                                    <div class="cube__face cube__face--front"><img src="FrontFacade.jpg" alt="Front facade" /></div>
+                                    <div class="cube__face cube__face--back"><img src="Hotel Pictures/IMG_7875.jpeg" alt="Room view" /></div>
+                                    <div class="cube__face cube__face--right"><img src="Hotel Pictures/IMG_7871.jpeg" alt="Room" /></div>
+                                    <div class="cube__face cube__face--left"><img src="Hotel Pictures/IMG_7870.jpeg" alt="Executive room" /></div>
+                                    <div class="cube__face cube__face--top"><img src="room1.heic" alt="Lobby view" /></div>
+                                    <div class="cube__face cube__face--bottom"><img src="Hotel Pictures/IMG_7884.jpeg" alt="Lobby" /></div>
+                                </div>
+                                <div class="cube-controls">
+                                    <button class="cube-btn" id="cube-prev" aria-label="Previous photo">←</button>
+                                    <button class="cube-btn" id="cube-next" aria-label="Next photo">→</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rooms" class="content-section muted">
+                <div class="container-wide">
+                    <h2>Rooms & Suites</h2>
+                    <div class="cards">
+                        <article class="card" data-type="exec" role="button" tabindex="0">
+                            <div class="card-gallery" aria-hidden="true">
+                                <img src="Hotel Pictures/IMG_7871.jpeg" alt="Executive room 1" />
+                                <img src="Hotel Pictures/IMG_7875.jpeg" alt="Executive room 2" />
+                                <img src="Hotel Pictures/IMG_7870.jpeg" alt="Executive room 3" />
+                            </div>
+                            <img src="Hotel Pictures/IMG_7871.jpeg" alt="Deluxe Room" />
+                            <h3>Executive Rooms</h3>
+                            <p>Comfortable, Clean & well-appointed rooms with city views.</p>
+                        </article>
+                        <article class="card" data-type="premium-exec" role="button" tabindex="0">
+                            <div class="card-gallery" aria-hidden="true">
+                                <img src="Hotel Pictures/IMG_7870.jpeg" alt="Premium 1" />
+                                <img src="Hotel Pictures/IMG_7875.jpeg" alt="Premium 2" />
+                                <img src="Hotel Pictures/colour graded.png" alt="Premium 3" />
+                            </div>
+                            <img src="Hotel Pictures/IMG_7870.jpeg" alt="Premium Executive" />
+                            <h3>Premium Executive rooms</h3>
+                            <p>Executive rooms but with a splash of luxury built into it, with various amenities.</p>
+                        </article>
+                        <article class="card" data-type="family-room" role="button" tabindex="0">
+                            <div class="card-gallery" aria-hidden="true">
+                                <img src="Hotel Pictures/IMG_7884.jpeg" alt="Family 1" />
+                                <img src="Hotel Pictures/IMG_7885.jpeg" alt="Family 2" />
+                                <img src="Hotel Pictures/IMG_7871.jpeg" alt="Family 3" />
+                            </div>
+                            <img src="Hotel Pictures/IMG_7870.jpeg" alt="Family Room" />
+                            <h3>Family Rooms</h3>
+                            <p>Spacious rooms with two King-sized double beds, perfect for a family of four.</p>
+                        </article>
+                        <article class="card" data-type="family-suite" role="button" tabindex="0">
+                            <div class="card-gallery" aria-hidden="true">
+                                <img src="Hotel Pictures/IMG_7871.jpeg" alt="Suite 1" />
+                                <img src="Hotel Pictures/IMG_7875.jpeg" alt="Suite 2" />
+                                <img src="Hotel Pictures/colour graded.png" alt="Suite 3" />
+                            </div>
+                            <img src="Hotel Pictures/IMG_7870.jpeg" alt="Suite" />
+                            <h3>Family Suite</h3>
+                            <p>Spacious suites with two King-sized double beds, two washrooms, 2 Air conditioners and a Balcony for your most auspicious events.</p>
+                        </article>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section id="dining" class="content-section">
+                <div class="container-wide">
+                    <h2>Dining</h2>
+                    <p>Our signature restaurant offers a seasonal menu crafted from local ingredients. Enjoy breakfast, a relaxed lunch or an intimate dinner in an elegant setting.</p>
+                    <div class="dining-grid">
+                        <img src="Buffet1.png" alt="Dining" />
+                        <img src="Buffet2.png" alt="Buffet" />
+                    </div>
+                </div>
+            </section>
+
+            <section id="location" class="content-section">
+                <div class="container-wide">
+                    <h2>Location</h2>
+                    <p>Find Hotel White Pearl on the map below.</p>
+                    <div class="map-wrap" style="max-width:900px;margin:0 auto;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.224!2d79.9143472!3d23.1517768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981b201b8910cad%3A0xaea07e7434ae180e!2sHotel%20White%20Pearl%2C%20Jabalpur!5e0!3m2!1sen!2sin!4v1707515400000" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container-wide foot-inner">
+                <div>© <span id="year"></span> Hotel White Pearl</div>
+                <div>Contact: <a href="tel:8982260004">+91 89822 60004</a></div>
+            </div>
+        </footer>
+
+        <script>
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+        <script>
+            // Cube rotation controls
+            const cube = document.getElementById('hotel-cube');
+            const faces = ['front', 'right', 'back', 'left', 'top', 'bottom'];
+            let currentFace = 0;
+            
+            function rotateCube(faceIndex) {
+                const rotations = {
+                    0: 'rotateX(-10deg) rotateY(0deg)',      // front
+                    1: 'rotateX(-10deg) rotateY(-90deg)',    // right
+                    2: 'rotateX(-10deg) rotateY(-180deg)',   // back
+                    3: 'rotateX(-10deg) rotateY(90deg)',     // left
+                    4: 'rotateX(80deg) rotateY(0deg)',       // top
+                    5: 'rotateX(-100deg) rotateY(0deg)'      // bottom
+                };
+                cube.style.transform = rotations[faceIndex];
             }
-        };
-
-        function toggleLanguage() {
-            isHindi = !isHindi;
-            const lang = isHindi ? 'hi' : 'en';
-            document.querySelector('h1').innerHTML = translations[lang].title;
-            document.querySelectorAll('.button')[0].innerHTML = translations[lang].contact;
-            document.querySelectorAll('.button')[1].innerHTML = translations[lang].whatsapp;
-            document.querySelectorAll('.button')[2].innerHTML = translations[lang].foodMenu;
-            document.querySelectorAll('.button')[3].innerHTML = translations[lang].review;
-            document.querySelectorAll('.button')[4].innerHTML = translations[lang].complaint;
-            document.querySelectorAll('.button')[5].innerHTML = translations[lang].breakfast;
-            document.querySelectorAll('.button')[6].innerHTML = translations[lang].hotelInfo;
-            document.querySelector('#info-modal h2').innerHTML = translations[lang].modalTitle;
-            document.querySelector('#info-modal p:nth-child(2)').innerHTML = translations[lang].wifi;
-            document.querySelector('#info-modal p:nth-child(3)').innerHTML = translations[lang].checkout;
-            document.querySelector('#info-modal p:nth-child(4)').innerHTML = translations[lang].rules;
-        }
-
-        document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
-
-        function showInfo() {
-            document.getElementById('info-modal').style.display = 'block';
-        }
-        function closeInfo() {
-            document.getElementById('info-modal').style.display = 'none';
-        }
-    </script>
-</body>
+            
+            document.getElementById('cube-next').addEventListener('click', ()=>{
+                currentFace = (currentFace + 1) % faces.length;
+                rotateCube(currentFace);
+            });
+            
+            document.getElementById('cube-prev').addEventListener('click', ()=>{
+                currentFace = (currentFace - 1 + faces.length) % faces.length;
+                rotateCube(currentFace);
+            });
+            
+            // Card clicks now scroll to the location map (booking removed)
+            document.querySelectorAll('.card[data-type]').forEach(card=>{
+                const activate = ()=>{
+                    const mapSection = document.getElementById('location');
+                    if(mapSection) mapSection.scrollIntoView({behavior:'smooth', block:'start'});
+                };
+                card.addEventListener('click', activate);
+                card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); activate(); } });
+            });
+        </script>
+    </body>
 </html>
-
